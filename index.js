@@ -13,16 +13,13 @@ app.use(cors({ optionsSuccessStatus: 200 })); // some legacy browsers choke on 2
 
 app.get("/api/whoami", async function(req, res) 
 {
-  var ip = (req.headers['x-forwarded-for'] || '').split(',')[0];
-    console.log(ip);
-  var language=req.acceptsLanguages();
+  var ip = req.ip;
+  var language=req.get('Accept-Language');
   var software=req.get('User-Agent');
     res.json({
-  ipadress:ip,
-  language:language[0],
+  ipaddress:ip,
+  language:language,
   software:software
-
-    
   });
   
 });
